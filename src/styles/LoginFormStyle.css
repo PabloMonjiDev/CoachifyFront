@@ -1,0 +1,78 @@
+.login-container {
+  background-image: url('../img/fondoFitnegro.jpg'); /* Ruta de la imagen de fondo */
+  background-size: cover;
+  display: flex;
+  justify-content: center; /* Centramos horizontalmente */
+  align-items: center;
+  height: 100vh;
+}
+
+.login-content {
+  background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro semitransparente */
+  padding: 30px; /* Aumentamos el espacio interno */
+  border-radius: 10px;
+  width: 300px; /* Ancho del formulario */
+  margin-left: 50%;
+}
+
+.login-content h2 {
+  color: yellow; /* Color amarillo para el título */
+  margin-bottom: 20px; /* Espacio inferior */
+  text-align: center;
+}
+
+.login-content form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-content label {
+  color: white; /* Color blanco para las etiquetas */
+  margin-bottom: 10px; /* Espacio inferior */
+}
+
+.login-content input {
+  width: 96%;
+  padding: 7px; /* Aumentamos el espacio interno */
+  margin-top: 8px;
+  margin-bottom: 16px; /* Espacio inferior */
+  border: none;
+  border-radius: 5px;
+  background-color: #444; /* Cambiamos el color de fondo a gris oscuro */
+  color: white; /* Cambiamos el color del texto a blanco */
+}
+
+.login-content button {
+  padding: 12px; /* Aumentamos el espacio interno */
+  background-color: yellow; /* Color amarillo para el botón */
+  color: black; /* Texto negro para el botón */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s; /* Transición suave */
+}
+
+.login-content button:hover {
+  background-color: #ffd700; /* Cambio de color al pasar el cursor */
+}
+
+.linkBtn {
+  color: white;
+  text-decoration: none;
+  margin-top: 15px;
+  font-size: 14px;
+  text-align: center;
+  display: block;
+  transition: color 1s; /* Transición suave */
+}
+
+.linkBtn:hover {
+  color : #ffd700;
+}
+
+.error {
+  color: #ff0000; /* Color rojo para el texto de error */
+  font-size: 14px; /* Tamaño de fuente */
+  margin-top: 10px; /* Espacio superior para separar el mensaje de error del resto del contenido */
+  margin-bottom: 10px;
+}

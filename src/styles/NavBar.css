@@ -1,0 +1,70 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20%;
+  height: 100%;
+  background-color: #333; /* Color de fondo oscuro */
+  color: #fff; /* Texto en color blanco */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.nav-links {
+  list-style: none;
+  padding: 0px;
+  margin-top: 50px;
+}
+
+.nav-links li {
+  margin-bottom: 30px;
+  cursor: pointer;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.3s ease;
+  
+}
+
+.nav-links a:hover {
+  color: #ffd700; /* Cambio de color al amarillo al pasar el mouse */
+}
+
+/* Estilos para el menú desplegable */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #333; /* Fondo oscuro */
+  min-width: 160px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: #fff;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #555; /* Cambio de color al pasar el mouse */
+}
+
+li:hover .dropdown-content {
+  display: block;
+}
+
+.config {
+  margin-top: 480px; /* Hace que se alinee en la parte inferior */
+}
+
+
