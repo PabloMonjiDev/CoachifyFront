@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom'; // Importa useNavigate y Link
-import AuthService from '../services/AuthService';
-import '../styles/LoginFormStyle.css';
+import { useNavigate, Link } from 'react-router-dom';
+import AuthService from '../../services/AuthService';
+import '../../assets/styles/LoginFormStyle.css';
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -9,7 +9,7 @@ const LoginForm = () => {
     password: ''
   });
   const [error, setError] = useState('');
-  const navigate = useNavigate(); // Utiliza el hook useNavigate
+  const navigate = useNavigate(); // Obtiene la función navigate
 
   const handleChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -19,7 +19,7 @@ const LoginForm = () => {
     e.preventDefault();
     try {
       await AuthService.login(formData.username, formData.password);
-      navigate('/home'); // Navega a la página de inicio cuando el inicio de sesión sea exitoso
+      navigate('/inicio'); // Navega a la página de inicio cuando el inicio de sesión sea exitoso
     } catch (error) {
       setError('Usuario o contraseña incorrectos. Por favor, inténtalo de nuevo.');
     }
@@ -55,7 +55,7 @@ const LoginForm = () => {
           </div>
           <button type="submit">Iniciar Sesión</button>
         </form>
-        <Link className='linkBtn' to="/register">¿Nuevo usuario?</Link>
+        <Link className='linkBtn' to="/registro">¿Nuevo usuario?</Link>
       </div>
     </div>
   );

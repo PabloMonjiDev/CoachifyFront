@@ -1,0 +1,31 @@
+#weightChart {
+  width: 100%;
+  height: 100%;
+  margin: 0 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(56, 56, 58);
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Personaliza de la leyenda */
+.weight-chart-legend {
+  font-family: "Arial", sans-serif;
+}
+
+/* Añade una animación suave */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.weight-chart-animation {
+  animation: fadeIn 0.5s ease-out; /* Ajusta la duración y la curva de la animación */
+}

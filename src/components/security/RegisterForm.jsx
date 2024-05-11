@@ -1,8 +1,8 @@
 // RegisterForm.js
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import AuthService from "../services/AuthService";
-import "../styles/RegisterFormStyle.css";
+import AuthService from "../../services/AuthService";
+import "../../assets/styles/RegisterFormStyle.css";
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -25,7 +25,7 @@ const RegisterForm = () => {
       // Almacenar el token en el localStorage
       localStorage.setItem('jwtToken', token);
       // Redirigir al usuario a la página de inicio de sesión u otra página
-      window.location.href = '/home';
+      window.location.href = '/inicio';
     } catch (error) {
       setError(error?.toString() || "Ocurrió un error desconocido");
     }

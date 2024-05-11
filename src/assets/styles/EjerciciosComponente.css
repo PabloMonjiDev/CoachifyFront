@@ -1,0 +1,139 @@
+/* Cambia el estilo del scroll */
+::-webkit-scrollbar {
+  width: 10px; /* Ancho del scroll */
+}
+
+/* Cambia el color del scroll */
+::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color del scroll */
+  border-radius: 5px; /* Bordes redondeados */
+}
+
+/* Cambia el color de fondo del scroll */
+::-webkit-scrollbar-track {
+  background-color: #333; /* Color de fondo del scroll */
+}
+
+.ejercicios-container {
+  flex: 0 0 10%;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  background-color: #333;
+  height: 100vh;
+  overflow: hidden;
+  margin-right: 20px;
+}
+
+.titulo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: white;
+  padding-top: 20px;
+}
+
+.añadir-button {
+  background-color: #ffd700;
+  color: #333;
+  text-decoration: none;
+  padding: 5px 8px;
+  font-size: 14px;
+  border-radius: 5px;
+  margin-left: 20px;
+  border: none;
+}
+
+.añadir-button:hover {
+  background-color: #ffc107;
+}
+
+.ejercicios-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+  max-height: calc(100vh - 12%);
+}
+
+.ejercicio-card {
+  display: flex;
+  align-items: center;
+  background-color: #ffd700;
+  padding: 5px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  margin: 0 auto;
+}
+
+.ejercicio-card img {
+  width: 40%;
+  height: auto;
+  margin-right: 0px;
+  border-radius: 10px;
+  margin-left: 5px;
+}
+
+.ejercicio-nombre {
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.ejercicio-info {
+  font-size: 16px;
+  color: #666;
+  padding: 0 0;
+  margin-top: 10px;
+}
+
+.series-repeticiones {
+  font-size: 15px;
+}
+
+.ultimo-card-formulario-visible {
+  margin-bottom: 75%;
+}
+
+.botones-accion {
+  margin-top: -15px;
+}
+
+.boton-modificar,
+.boton-eliminar {
+  background-color: transparent;
+  border: none;
+  color: #333;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 5px;
+  margin-top: 0;
+}
+
+.boton-modificar:hover,
+.boton-eliminar:hover {
+  color: red;
+}
+
+.rutina-link {
+  text-decoration: none;
+}
+
+.volver-button {
+  background-color: #ffd700;
+  color: #333;
+  text-decoration: none;
+  padding: 5px 8px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: none;
+  margin-right: 20px;
+}
+
+.volver-button:hover {
+  background-color: #ffc107;
+}

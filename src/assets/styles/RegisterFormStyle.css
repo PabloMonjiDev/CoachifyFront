@@ -1,0 +1,71 @@
+.login-container {
+  background-image: url("../img/fondoFitnegro.jpg");
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-content {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 30px;
+  border-radius: 10px;
+  width: 300px;
+  margin-left: 50%;
+}
+
+.login-content h2 {
+  color: #ffd700;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.login-content form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-content label {
+  color: white;
+  margin-bottom: 10px;
+}
+
+.login-content input {
+  width: 96%;
+  padding: 7px;
+  margin-top: 8px;
+  margin-bottom: 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #444;
+  color: white;
+}
+
+.login-content button {
+  padding: 12px;
+  background-color: #ffd700;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-content button:hover {
+  background-color: #ffd700;
+}
+
+.linkBtn {
+  color: white;
+  text-decoration: none;
+  margin-top: 15px;
+  font-size: 14px;
+  text-align: center;
+  display: block;
+  transition: color 1s;
+}
+
+.linkBtn:hover {
+  color: #ffd700;
+}

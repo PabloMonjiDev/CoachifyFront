@@ -1,0 +1,110 @@
+* {
+  font-size: 12px;
+}
+
+.formulario-container {
+  background-color: #333;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  margin-bottom: 0;
+  margin: 0 auto;
+  margin-top: -10px;
+  color: #fff;
+}
+
+.formulario-container h2 {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.form-group {
+  margin-bottom: 0;
+}
+
+.form-img {
+  margin-right: 5px;
+  display: inline-block;
+  width: 100%;
+}
+
+.form-img label {
+  margin-right: 5px;
+}
+
+.form-img input {
+  border: none;
+}
+
+.form-name {
+  margin-right: 5px;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.form-name label {
+  margin-right: 5px;
+}
+
+.form-name input {
+  height: 20px;
+  margin-right: 6px;
+}
+
+.form-info {
+  margin-right: 5px;
+  display: inline-block;
+  width: 100%;
+}
+
+.form-info label {
+  margin-right: 5px;
+}
+
+.form-info input {
+  height: 20px;
+  margin-right: auto;
+}
+
+.form-group input[type="number"] {
+  width: 20%;
+  height: 22px;
+  padding: auto;
+}
+
+.form-img,
+.form-name,
+.form-info {
+  display: flex;
+  align-items: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+/* Botones */
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.button-group button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button-group button[type="submit"] {
+  background-color: #4caf50;
+  color: white;
+}
+
+.button-group button[type="submit"]:hover {
+  background-color: #45a049;
+}
