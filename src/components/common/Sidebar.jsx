@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import "../../assets/styles/Sidebar.css";
-import logo from "../../assets/img/logoProvisional.png";
+import logo from "../../assets/img/logoCoachifyFItness.jpeg";
 import {
   FaHome,
   FaUsers,
@@ -51,7 +51,7 @@ const Sidebar = () => {
           src={logo}
           alt="Logo"
           className="logo"
-          style={{ width: "300px", height: "300px" }}
+          style={{ width: "150px", height: "150px" }}
         />
       </div>
       <ul className="sidebar-menu">
