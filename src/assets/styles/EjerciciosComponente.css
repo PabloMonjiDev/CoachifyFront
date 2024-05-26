@@ -66,7 +66,7 @@
   padding: 5px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  width: 90%;
+  width: 60%;
   margin: 0 auto;
 }
 
@@ -75,13 +75,13 @@
   height: auto;
   margin-right: 0px;
   border-radius: 10px;
-  margin-left: 5px;
 }
 
 .ejercicio-nombre {
   font-size: 20px;
   font-weight: bold;
-  margin-left: 5px;
+  color: black;
+  margin-bottom: 0;
 }
 
 .ejercicio-info {
@@ -89,6 +89,7 @@
   color: #666;
   padding: 0 0;
   margin-top: 10px;
+  margin-left: 15%;
 }
 
 .series-repeticiones {
@@ -136,4 +137,24 @@
 
 .volver-button:hover {
   background-color: #ffc107;
+}
+
+@media (max-width: 768px) {
+  .ejercicio-card {
+    width: 90%;
+  }
+
+  .ejercicio-info {
+    margin-left: 5%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .ejercicio-card {
+    width: 90%;
+  }
+
+  .ejercicio-info {
+    margin-left: 5%;
+  }
 }

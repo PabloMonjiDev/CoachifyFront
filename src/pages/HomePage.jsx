@@ -6,14 +6,11 @@ import "../assets/styles/HomePage.css";
 const HomePage = () => {
   return (
     <div className="home-page">
-      <div className="sidebar">
-        <Sidebar2 />
-      </div>
-
+      <Sidebar2 />
       <div className="page">
-        <div className="header">
+        <header className="header">
           <h1>¡Bienvenido Entrenador!</h1>
-        </div>
+        </header>
         <hr />
         <div className="calendario">
           <Calendario />

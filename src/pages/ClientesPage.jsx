@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "../components/common/Sidebar";
 import "../assets/styles/Clientes.css";
-import "../assets/styles/HomePage.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -132,53 +131,20 @@ const ClientsPage = () => {
           overlay: {
             backgroundColor: "rgba(0, 0, 0, 0.75)",
           },
-          content: {
-            position: "fixed",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            backgroundColor: "#f8f9fa",
-            padding: "20px",
-            borderRadius: "15px",
-            width: "25%",
-            height: "25%",
-            maxWidth: "90%",
-            maxHeight: "90%",
-            overflowY: "auto",
-            boxShadow: "0 0 20px rgba(0, 0, 0, 0.2)",
-            transition: "all 0.3s ease",
-            textAlign: "center",
-          },
         }}
+        className={"custom-modal-eliminar"}
       >
-        <p style={{ fontSize: "20px", marginTop: "18px", color: "black" }}>
+        <p className="pregunta">
           ¿Estás seguro de que quieres eliminar este cliente?
         </p>
         <button
-          style={{
-            backgroundColor: "red",
-            color: "white",
-            marginRight: "10px",
-            border: "none",
-            borderRadius: "5px",
-            padding: "10px",
-            paddingLeft: "12px",
-            paddingRight: "12px",
-          }}
+          className="btnEliminarModal"
           onClick={handleDeleteClient}
         >
           Eliminar
         </button>
         <button
-          style={{
-            backgroundColor: "gray",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
-            padding: "10px",
-            paddingLeft: "10px",
-            paddingRight: "10px",
-          }}
+          className="btnCancelarModal"
           onClick={closeModal}
         >
           Cancelar
@@ -193,22 +159,8 @@ const ClientsPage = () => {
           overlay: {
             backgroundColor: "rgba(0, 0, 0, 0.75)",
           },
-          content: {
-            position: "fixed",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            backgroundColor: "transparent",
-            border: "none",
-            borderRadius: "8px",
-            width: "45%",
-            height: "90%",
-            minWidth: "30%",
-            overflowY: "auto",
-            boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
-            transition: "all 0.3s ease",
-          },
         }}
+        className={"custom-modal-añadir"}
       >
         {currentForm === "InfoBasicaForm" && (
           <InfoBasicaForm

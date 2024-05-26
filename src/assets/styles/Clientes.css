@@ -1,13 +1,14 @@
 .clients-page {
   display: flex;
   min-height: 100vh;
+  background-color: #333;
 }
 
 .sidebar {
   width: 25%;
   background-color: #333;
   color: white;
-  padding: 20px;
+  padding: 0;
 }
 
 .clients-content {
@@ -22,7 +23,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 0px;
 }
 
 .header h1 {
@@ -36,7 +37,8 @@
 }
 
 .client-card {
-  background-color: #f0f0f0;
+  background-color: rgb(56, 56, 58);
+  color: white;
   border-radius: 8px;
   padding: 10px;
   display: flex;
@@ -62,19 +64,21 @@
 
 .btnEliminar {
   color: red;
-  margin-left: 10px;
+  margin-left: 5px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  background-color: transparent;
   transition: background-color 0.3s;
 }
 
 .btnver {
-  color: black;
-  margin-right: 10px;
+  color: rgb(204, 204, 204);
+  margin-right: 5px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  background-color: transparent;
   transition: background-color 0.3s;
 }
 
@@ -93,37 +97,114 @@
   background-color: #ffc107;
 }
 
-.modal {
+.custom-modal-añadir {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: transparent;
+    border: none;
+    border-radius: 8px;
+    width: 45%;
+    height: 90%;
+    min-width: 30%;
+    overflow-y: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.custom-modal-eliminar {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: white;
+  background-color: #333;
   padding: 20px;
-  border-radius: 8px;
-  width: 400px;
+  border-radius: 15px;
+  width: 80%;
+  height: 20% !important;
   max-width: 90%;
-  max-height: 90%;
+  max-height: 40%;
   overflow-y: auto;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  text-align: center;
 }
 
-.modal h2 {
-  margin-top: 0;
+.pregunta {
+  font-size: 20px;
+  margin-top: 18px;
+  color: white;
 }
 
-.modal p {
-  margin-bottom: 20px;
-}
-
-.modal button {
+.btnEliminarModal {
+  background-color: red;
+  color: white;
   margin-right: 10px;
-  padding: 10px 20px;
+  border: none;
   border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  padding: 10px;
+  padding-left: 12px;
+  padding-right: 12px;
 }
 
-.modal button:hover {
-  background-color: #ddd;
+.btnCancelarModal {
+  background-color: gray;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.form-container {
+  background-color: #333 !important;
+  color: white !important;
+  height: auto !important;
+}
+
+.form-group input, .form-group select, .form-group textarea {
+  background-color: #666 !important;
+  border: none !important;
+  color: white !important;
+}
+
+@media (max-width: 768px) {
+  .clients-page {
+    flex-direction: column; /* Cambia la dirección del flexbox a columna */
+    height: 100vh;
+  }
+
+  .sidebar {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    margin-bottom: 20px; /* Añade margen inferior para separarlo del contenido */
+  }
+
+  
+  .clients-content {
+    margin-left: 0; /* Elimina el margen izquierdo en pantallas pequeñas */
+  }
+
+  .btnAñadir {
+    background-color: #ffd700;
+    width: 15%;
+    color: black;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .custom-modal-añadir {
+    width: 90%;
+    height: 75%;
+    overflow-y: hidden;
+  }
+  .custom-modal {
+    width: 90% !important;
+    height: 20% !important;
+    max-height: 20% !important;
+  }
 }

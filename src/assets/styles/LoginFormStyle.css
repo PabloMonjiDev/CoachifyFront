@@ -76,3 +76,21 @@
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+@media (max-width: 768px) {
+
+  .login-container {
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .login-content {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 30px;
+    border-radius: 10px;
+    width: 300px;
+    margin-left: 50%;
+  }
+
+}

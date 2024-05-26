@@ -56,7 +56,6 @@ const VistaClientePage = () => {
           historialMedico: historialMedicoResponse.data,
           objetivos: objetivosResponse.data,
         });
-
       } catch (error) {
         console.error("Error al obtener los datos del cliente:", error);
       }
@@ -98,21 +97,21 @@ const VistaClientePage = () => {
     } catch (error) {
       console.error("Error al añadir el peso:", error);
     }
-    
+
     setModalOpen(false);
   };
 
+  const [activeTab, setActiveTab] = useState("progreso");
+
   return (
     <div className="contenedor">
-
-      <div className="mini-sidebar">
-          <Sidebar />
+      <div className="sidebar">
+        <Sidebar />
       </div>
-      
-      <div className="izquierda">
+      <div className="contenedor-pagina">
         {/* COMPONENTE INFORMACION */}
         <div className="arriba">
-          <div className="informacion-seccion informacion-basica">
+          <div className="informacion-seccion-basica">
             <div className="info-cliente">
               <div className="info-detalle">
                 <div className="img-container">
@@ -152,7 +151,7 @@ const VistaClientePage = () => {
               </div>
             </div>
           </div>
-          <div className="informacion-seccion historial-medico">
+          <div className="informacion-seccion-historial">
             <h2 className="seccion-titulo">Historial Médico</h2>
             <div className="info-historial">
               <p>
@@ -177,7 +176,7 @@ const VistaClientePage = () => {
               </p>
             </div>
           </div>
-          <div className="informacion-seccion objetivos">
+          <div className="informacion-seccion-objetivos">
             <h2 className="seccion-titulo">Objetivos</h2>
             <div className="info-objetivos">
               <p>
@@ -210,42 +209,58 @@ const VistaClientePage = () => {
 
         {/* COMPONENTE PROGRESO */}
         <div className="abajo">
-          <div className="grafico-container">
-            <GraficoComponente pesosData={pesosData} clienteID={clienteID} />
-
-            <div className="acciones-container">
-              <button onClick={() => setModalOpen(true)}>Añadir Peso</button>
+          <div className="tab-container">
+            <div
+              className={`tab ${activeTab === "progreso" ? "active" : ""}`}
+              onClick={() => setActiveTab("progreso")}
+            >
+              Progreso
+            </div>
+            <div
+              className={`tab ${activeTab === "rutinas" ? "active" : ""}`}
+              onClick={() => setActiveTab("rutinas")}
+            >
+              Rutinas
             </div>
           </div>
-          <div className="info-section-container">
-            <h3>Composición Corporal</h3>
-            <p>Altura: {clienteInfo.composicioncorporal.altura}</p>
-            <p>
-              Circunferencia de Cadera:{" "}
-              {clienteInfo.composicioncorporal.cirCadera}
-            </p>
-            <p>
-              Circunferencia de Cintura:{" "}
-              {clienteInfo.composicioncorporal.cirCintura}
-            </p>
-            <p>IMC: {clienteInfo.composicioncorporal.imc}</p>
-            <p>Peso: {clienteInfo.composicioncorporal.peso}</p>
-            <p>
-              Porcentaje de Grasa Corporal:{" "}
-              {clienteInfo.composicioncorporal.porcentajeGrasaCorporal}
-            </p>
+          <div className="content-container">
+            {activeTab === "progreso" && (
+              <div
+              className={`progreso-container ${
+                activeTab === "progreso" ? "active" : ""
+              }`}
+            >
+              <div className="grafico-composicion-wrapper">
+                <div className="grafico-container">
+                  <GraficoComponente pesosData={pesosData} clienteID={clienteID} />
+                  <div className="acciones-container">
+                    <button onClick={() => setModalOpen(true)}>Añadir Peso</button>
+                  </div>
+                </div>
+                <div className="composicion-container">
+                  <h3>Composición Corporal</h3>
+                  <p>Altura: {clienteInfo.composicioncorporal.altura}</p>
+                  <p>Circunferencia de Cadera: {clienteInfo.composicioncorporal.cirCadera}</p>
+                  <p>Circunferencia de Cintura: {clienteInfo.composicioncorporal.cirCintura}</p>
+                  <p>IMC: {clienteInfo.composicioncorporal.imc}</p>
+                  <p>Peso: {clienteInfo.composicioncorporal.peso}</p>
+                  <p>Porcentaje de Grasa Corporal: {clienteInfo.composicioncorporal.porcentajeGrasaCorporal}</p>
+                </div>
+              </div>
+            </div>
+            )}
+            {activeTab === "rutinas" && (
+              <div
+                className={`rutinas-container ${
+                  activeTab === "rutinas" ? "active" : ""
+                }`}
+              >
+                <RutinasComponente clienteID={clienteID} />
+              </div>
+            )}
           </div>
         </div>
       </div>
-
-      {/***************************************/}
-      {/* COMPONENTE RUTINA */}
-      <div className="derecha">
-        <div className="rutinas-contenedor">
-          <RutinasComponente clienteID={clienteID} />
-        </div>
-      </div>
-
       {/* Modal para añadir peso */}
       <Modal
         isOpen={modalOpen}
@@ -325,6 +340,7 @@ const VistaClientePage = () => {
               border: "none",
               cursor: "pointer",
             }}
+            className="btn-guardar"
           >
             Guardar
           </button>

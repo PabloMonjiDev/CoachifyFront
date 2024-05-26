@@ -6,8 +6,25 @@ import Modal from "react-modal";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import "../../assets/styles/Calendario.css";
 
 const localizer = momentLocalizer(moment);
+
+export const messages = {
+  allDay: 'Todo el día',
+  previous: '<',
+  next: '>',
+  today: 'Hoy',
+  month: 'Mes',
+  week: 'Semana',
+  day: 'Día',
+  agenda: 'Agenda',
+  date: 'Fecha',
+  time: 'Hora',
+  event: 'Evento',
+  noEventsInRange: 'No hay eventos en este rango',
+  showMore: total => `+ Ver más (${total})`
+};
 
 const Calendario = () => {
   const [eventos, setEventos] = useState([]);
@@ -41,22 +58,25 @@ const Calendario = () => {
     fetchEventos();
   }, []);
 
-  const handleSelectSlot = (slotInfo) => {
-    const { start, end } = slotInfo;
+  const handleSelectSlot = ({ start, end }) => {
     setFechaInicio(start);
     setFechaFin(end);
+    setNombreCita("");
+    setDescripcion("");
+    setHoraInicio(new Date(start));
+    setHoraFin(new Date(end));
     setEditingEvent(null);
     setShowModal(true);
   };
 
   const handleSelectEvent = (event) => {
     setEditingEvent(event);
-    setNombreCita(event.nombreCita);
+    setNombreCita(event.title);
     setDescripcion(event.descripcion);
-    setFechaInicio(new Date(event.fechaInicio));
-    setFechaFin(new Date(event.fechaFin));
-    setHoraInicio(moment(event.horaInicio, "HH:mm:ss").toDate());
-    setHoraFin(moment(event.horaFin, "HH:mm:ss").toDate());
+    setFechaInicio(new Date(event.start));
+    setFechaFin(new Date(event.end));
+    setHoraInicio(new Date(event.start));
+    setHoraFin(new Date(event.end));
     setShowModal(true);
   };
 
@@ -72,38 +92,24 @@ const Calendario = () => {
         descripcion,
         fechaInicio: moment(fechaInicio).format("YYYY-MM-DD"),
         fechaFin: moment(fechaFin).format("YYYY-MM-DD"),
-        horaInicio: moment(horaInicio, "HH:mm").format("HH:mm:ss"),
-        horaFin: moment(horaFin, "HH:mm").format("HH:mm:ss"),
+        horaInicio: moment(horaInicio).format("HH:mm:ss"),
+        horaFin: moment(horaFin).format("HH:mm:ss"),
       };
 
-      if (editingEvent && editingEvent.eventoID) {
+      if (editingEvent && editingEvent.id) {
         await axios.put(
-          `http://localhost:8080/api/calendario/${editingEvent.eventoID}`,
+          `http://localhost:8080/api/calendario/${editingEvent.id}`,
           event
         );
         const updatedEvents = eventos.map((ev) =>
-          ev.eventoID === editingEvent.eventoID ? { ...ev, ...event } : ev
+          ev.id === editingEvent.id ? { ...ev, ...event } : ev
         );
         setEventos(updatedEvents);
       } else {
-        const res = await axios.post(
-          "http://localhost:8080/api/calendario",
-          event
-        );
+        const res = await axios.post("http://localhost:8080/api/calendario", event);
         setEventos([...eventos, res.data]);
       }
       handleCloseModal();
-
-      // Después de una inserción o actualización exitosa, volver a obtener la lista de eventos para actualizar el calendario
-      const res = await axios.get("http://localhost:8080/api/calendario");
-      const eventosFormateados = res.data.map((evento) => ({
-        ...evento,
-        start: new Date(evento.fechaInicio),
-        end: new Date(evento.fechaFin),
-        title: evento.nombreCita,
-        id: evento.id,
-      }));
-      setEventos(eventosFormateados);
     } catch (error) {
       setError("Error al enviar el formulario.");
     }
@@ -120,14 +126,10 @@ const Calendario = () => {
   };
 
   const handleDelete = async () => {
-    if (editingEvent && editingEvent.eventoID) {
+    if (editingEvent && editingEvent.id) {
       try {
-        await axios.delete(
-          `http://localhost:8080/api/calendario/${editingEvent.eventoID}`
-        );
-        const updatedEvents = eventos.filter(
-          (ev) => ev.eventoID !== editingEvent.eventoID
-        );
+        await axios.delete(`http://localhost:8080/api/calendario/${editingEvent.id}`);
+        const updatedEvents = eventos.filter((ev) => ev.id !== editingEvent.id);
         setEventos(updatedEvents);
         handleCloseModal();
       } catch (error) {
@@ -137,16 +139,17 @@ const Calendario = () => {
   };
 
   return (
-    <div style={{ height: "75%" }}>
+    <div style={{ height: "85%" }}>
       <Calendar
         localizer={localizer}
         events={eventos}
         startAccessor="start"
         endAccessor="end"
         style={{ margin: "50px" }}
-        selectable={true}
+        selectable
         onSelectSlot={handleSelectSlot}
         onSelectEvent={handleSelectEvent}
+        messages={messages}
       />
 
       <Modal
@@ -157,34 +160,18 @@ const Calendario = () => {
             backgroundColor: "rgba(0, 0, 0, 0.75)",
             zIndex: "1000",
           },
-          content: {
-            position: "fixed",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            backgroundColor: "transparent",
-            padding: "10px",
-            border: "none",
-            width: "25%",
-            height: "86%",
-            maxWidth: "90%",
-            maxHeight: "90%",
-            overflowY: "auto",
-            transition: "all 0.3s ease",
-          },
         }}
+        className="custom-modal"
       >
         <div className="modal-dialog">
-          <div className="modal-content" style={{ borderRadius: "15px" }}>
+          <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title">
                 {editingEvent ? "Actualizar evento" : "Nuevo evento"}
               </h5>
-              <button
-                type="button"
-                className="btn-close"
-                onClick={handleCloseModal}
-              ></button>
+              <button type="button" className="btn-close" onClick={handleCloseModal}>
+                &times;
+              </button>
             </div>
             <div className="modal-body">
               <label>Nombre de la cita: </label>
@@ -229,9 +216,7 @@ const Calendario = () => {
                 type="time"
                 className="form-control"
                 value={moment(horaFin).format("HH:mm")}
-                onChange={(e) =>
-                  setHoraFin(moment(e.target.value, "HH:mm").toDate())
-                }
+                onChange={(e) => setHoraFin(moment(e.target.value, "HH:mm").toDate())}
               />
             </div>
             <div className="modal-footer">
@@ -240,14 +225,6 @@ const Calendario = () => {
                   type="button"
                   onClick={handleDelete}
                   className="btn btn-danger"
-                  style={{
-                    backgroundColor: "transparent",
-                    marginRight: "auto",
-                    color: "red",
-                    border: "none",
-                    borderRadius: "5px",
-                    cursor: "pointer"
-                  }}
                 >
                   <FontAwesomeIcon icon={faTrashAlt} />
                 </button>

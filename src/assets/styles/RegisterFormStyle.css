@@ -69,3 +69,16 @@
 .linkBtn:hover {
   color: #ffd700;
 }
+
+@media (max-width: 768px) {
+  
+  .login-content {
+    justify-content: flex-start;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 30px;
+    border-radius: 10px;
+    width: 300px;
+    margin-left: 0;
+  }
+
+}
