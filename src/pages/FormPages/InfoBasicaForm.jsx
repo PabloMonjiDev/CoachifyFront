@@ -30,7 +30,7 @@ const InfoBasicaForm = ({ onNext }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/api/clientes", formData);
+      const response = await axios.post("https://coachifybackend-1.onrender.com/api/clientes", formData);
       const newClientID = response.data.clienteID; // Obtener el ID del nuevo cliente desde la respuesta
       onNext(newClientID); // Pasar el ID del nuevo cliente a onNext
     } catch (error) {

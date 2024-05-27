@@ -24,16 +24,16 @@ const VistaClientePage = () => {
     const fetchData = async () => {
       try {
         const infoBasicaPromise = axios.get(
-          `http://localhost:8080/api/clientes/${clienteID}`
+          `https://coachifybackend-1.onrender.com/api/clientes/${clienteID}`
         );
         const composicionCorporalPromise = axios.get(
-          `http://localhost:8080/api/composicioncorporal/cliente/${clienteID}`
+          `https://coachifybackend-1.onrender.com/api/composicioncorporal/cliente/${clienteID}`
         );
         const historialMedicoPromise = axios.get(
-          `http://localhost:8080/api/historialMedico/cliente/${clienteID}`
+          `https://coachifybackend-1.onrender.com/api/historialMedico/cliente/${clienteID}`
         );
         const objetivosPromise = axios.get(
-          `http://localhost:8080/api/objetivos/cliente/${clienteID}`
+          `https://coachifybackend-1.onrender.com/api/objetivos/cliente/${clienteID}`
         );
 
         // Espera a que todas las promesas se resuelvan
@@ -73,7 +73,7 @@ const VistaClientePage = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/pesos/cliente/${clienteID}`
+          `https://coachifybackend-1.onrender.com/api/pesos/cliente/${clienteID}`
         );
         // Actualiza el estado con los pesos obtenidos
         setPesosData(response.data);
@@ -87,7 +87,7 @@ const VistaClientePage = () => {
 
   const handleAñadirPeso = async () => {
     try {
-      const response = await axios.post("http://localhost:8080/api/pesos", {
+      const response = await axios.post("https://coachifybackend-1.onrender.com/api/pesos", {
         clienteID: { clienteID: clienteID },
         peso: nuevoPeso,
         fecha: nuevaFecha,

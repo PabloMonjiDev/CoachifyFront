@@ -28,7 +28,7 @@ const RutinaForm = ({ onClose, clienteID, actualizarRutinas, rutina }) => {
       let response;
       if (rutina) {
         response = await axios.put(
-          `http://localhost:8080/api/rutinas/${rutina.rutinaID}`,
+          `https://coachifybackend-1.onrender.com/api/rutinas/${rutina.rutinaID}`,
           formData
         );
         actualizarRutinas((prevRutinas) =>
@@ -38,7 +38,7 @@ const RutinaForm = ({ onClose, clienteID, actualizarRutinas, rutina }) => {
         );
       } else {
         response = await axios.post(
-          "http://localhost:8080/api/rutinas",
+          "https://coachifybackend-1.onrender.com/api/rutinas",
           formData
         );
         actualizarRutinas((prevRutinas) => [...prevRutinas, response.data]);

@@ -13,7 +13,7 @@ const Sidebar = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/clientes")
+      .get("https://coachifybackend-1.onrender.com/api/clientes")
       .then((response) => {
         setClientes(response.data);
       })

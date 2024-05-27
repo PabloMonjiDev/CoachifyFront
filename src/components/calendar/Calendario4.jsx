@@ -41,7 +41,7 @@ const Calendario = () => {
   useEffect(() => {
     const fetchEventos = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/api/calendario");
+        const res = await axios.get("https://coachifybackend-1.onrender.com/api/calendario");
         const eventosFormateados = res.data.map((evento) => ({
           ...evento,
           start: new Date(evento.fechaInicio),
@@ -98,7 +98,7 @@ const Calendario = () => {
 
       if (editingEvent && editingEvent.id) {
         await axios.put(
-          `http://localhost:8080/api/calendario/${editingEvent.id}`,
+          `https://coachifybackend-1.onrender.com/api/calendario/${editingEvent.id}`,
           event
         );
         const updatedEvents = eventos.map((ev) =>
@@ -106,7 +106,7 @@ const Calendario = () => {
         );
         setEventos(updatedEvents);
       } else {
-        const res = await axios.post("http://localhost:8080/api/calendario", event);
+        const res = await axios.post("https://coachifybackend-1.onrender.com/api/calendario", event);
         setEventos([...eventos, res.data]);
       }
       handleCloseModal();
@@ -128,7 +128,7 @@ const Calendario = () => {
   const handleDelete = async () => {
     if (editingEvent && editingEvent.id) {
       try {
-        await axios.delete(`http://localhost:8080/api/calendario/${editingEvent.id}`);
+        await axios.delete(`https://coachifybackend-1.onrender.com/api/calendario/${editingEvent.id}`);
         const updatedEvents = eventos.filter((ev) => ev.id !== editingEvent.id);
         setEventos(updatedEvents);
         handleCloseModal();

@@ -11,7 +11,7 @@ const GraficoComponente = ({ clienteID }) => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/api/pesos/cliente/${clienteID}`
+          `https://coachifybackend-1.onrender.com/api/pesos/cliente/${clienteID}`
         );
         const data = await response.json();
         setPesosData(data); // Actualizar los datos de peso con la respuesta del servidor

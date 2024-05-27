@@ -24,7 +24,7 @@ const ComposicionCorporalForm = ({ onNext, clienteID }) => {
     e.preventDefault();
     try {
       await axios.post(
-        "http://localhost:8080/api/composicioncorporal",
+        "https://coachifybackend-1.onrender.com/api/composicioncorporal",
         formData
       );
 
@@ -32,7 +32,7 @@ const ComposicionCorporalForm = ({ onNext, clienteID }) => {
 
       // Envia el peso insertado, la fecha actual y la id del cliente a la grafica de pesos
       await axios.post(
-        "http://localhost:8080/api/pesos",
+        "https://coachifybackend-1.onrender.com/api/pesos",
         {
           peso: formData.peso,
           clienteID: { clienteID: formData.cliente.clienteID },

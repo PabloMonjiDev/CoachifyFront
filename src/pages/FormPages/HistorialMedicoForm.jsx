@@ -21,7 +21,7 @@ const HistorialMedicoForm = ({ onNext, clienteID }) => {
     e.preventDefault();
     try {
       await axios.post(
-        "http://localhost:8080/api/historialMedico",
+        "https://coachifybackend-1.onrender.com/api/historialMedico",
         formData
       );
       onNext();

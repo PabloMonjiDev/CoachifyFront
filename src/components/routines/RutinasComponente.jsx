@@ -21,7 +21,7 @@ const RutinasComponente = ({ clienteID }) => {
     const fetchRutinas = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/rutinas/cliente/${clienteID}`
+          `https://coachifybackend-1.onrender.com/api/rutinas/cliente/${clienteID}`
         );
         setRutinas(response.data);
       } catch (error) {
@@ -56,7 +56,7 @@ const RutinasComponente = ({ clienteID }) => {
       }
 
       await axios.delete(
-        `http://localhost:8080/api/rutinas/${rutina.rutinaID}`
+        `https://coachifybackend-1.onrender.com/api/rutinas/${rutina.rutinaID}`
       );
       setRutinas((prevRutinas) =>
         prevRutinas.filter((item) => item.rutinaID !== rutina.rutinaID)

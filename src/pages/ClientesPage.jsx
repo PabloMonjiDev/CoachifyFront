@@ -27,7 +27,7 @@ const ClientsPage = () => {
 
   const fetchClients = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/clientes");
+      const response = await axios.get("https://coachifybackend-1.onrender.com/api/clientes");
       setClients(response.data);
     } catch (error) {
       console.error("Error fetching clients:", error);
@@ -55,7 +55,7 @@ const ClientsPage = () => {
     try {
       if (clientToDelete) {
         await axios.delete(
-          `http://localhost:8080/api/clientes/${clientToDelete}`
+          `https://coachifybackend-1.onrender.com/api/clientes/${clientToDelete}`
         );
         console.log("Client deleted successfully");
         // Actualiza la lista de clientes después de eliminar

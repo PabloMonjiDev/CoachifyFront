@@ -14,16 +14,16 @@ const ClienteInfoComponent = () => {
     const fetchData = async () => {
       try {
         const infoBasicaResponse = await axios.get(
-          "http://localhost:8080/api/infoBasica"
+          "https://coachifybackend-1.onrender.com/api/infoBasica"
         );
         const composicionCorporalResponse = await axios.get(
-          "http://localhost:8080/api/composicionCorporal"
+          "https://coachifybackend-1.onrender.com/api/composicionCorporal"
         );
         const historialMedicoResponse = await axios.get(
-          "http://localhost:8080/api/historialMedico"
+          "https://coachifybackend-1.onrender.com/api/historialMedico"
         );
         const objetivosResponse = await axios.get(
-          "http://localhost:8080/api/objetivos"
+          "https://coachifybackend-1.onrender.com/api/objetivos"
         );
 
         setClienteInfo({

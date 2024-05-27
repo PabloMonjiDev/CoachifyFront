@@ -21,7 +21,7 @@ const EjerciciosComponente = ({ rutinaID, volverARutinas }) => {
       try {
         if (rutinaID) {
           const response = await axios.get(
-            `http://localhost:8080/api/rutinas/${rutinaID}/ejercicios`
+            `https://coachifybackend-1.onrender.com/api/rutinas/${rutinaID}/ejercicios`
           );
           setEjercicios(response.data);
         }
@@ -45,7 +45,7 @@ const EjerciciosComponente = ({ rutinaID, volverARutinas }) => {
   const handleEliminar = async (ejercicio) => {
     try {
       await axios.delete(
-        `http://localhost:8080/api/ejercicios/${ejercicio.rutinaEjercicioID}`
+        `https://coachifybackend-1.onrender.com/api/ejercicios/${ejercicio.rutinaEjercicioID}`
       );
       setEjercicios((prevEjercicios) =>
         prevEjercicios.filter(

@@ -27,7 +27,7 @@ const ObjetivosForm = ({ onFinish, clienteID }) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/objetivos",
+        "https://coachifybackend-1.onrender.com/api/objetivos",
         formData
       );
       onFinish(response.data.clienteID);

@@ -43,7 +43,7 @@ const EjercicioForm = ({ onClose, rutinaID, actualizarEjercicios, ejercicio }) =
     if (ejercicio) {
 
       response = await axios.put(
-        `http://localhost:8080/api/ejercicios/${ejercicio.rutinaEjercicioID}`,
+        `https://coachifybackend-1.onrender.com/api/ejercicios/${ejercicio.rutinaEjercicioID}`,
         formData
       );
       actualizarEjercicios((prevEjercicios) =>
@@ -53,7 +53,7 @@ const EjercicioForm = ({ onClose, rutinaID, actualizarEjercicios, ejercicio }) =
       );
     } else {
       // Si es un nuevo ejercicio
-      response = await axios.post("http://localhost:8080/api/ejercicios", formData);
+      response = await axios.post("https://coachifybackend-1.onrender.com/api/ejercicios", formData);
       // Actualiza el estado de ejercicios utilizando los datos devueltos por la API
       actualizarEjercicios((prevEjercicios) => [...prevEjercicios, response.data]);
     }
