@@ -10,33 +10,37 @@ import InfoBasicaForm from "./FormPages/InfoBasicaForm";
 import ComposicionCorporalForm from "./FormPages/ComposicionCorporalForm";
 import HistorialMedicoForm from "./FormPages/HistorialMedicoForm";
 import ObjetivosForm from "./FormPages/ObjetivosForm";
+import Loader from "../components/common/Loader"; // Importa el componente Loader
 
 Modal.setAppElement("#root");
 
 const ClientsPage = () => {
-  const [clients, setClients] = useState([]); // Estado para almacenar la lista de clientes
-  const [modalIsOpen, setModalIsOpen] = useState(false); // Estado para controlar la apertura y cierre del modal
-  const [clientToDelete, setClientToDelete] = useState(null); // Estado para almacenar el ID del cliente a eliminar
-  const [addClientDialogOpen, setAddClientDialogOpen] = useState(false); // Estado para controlar la apertura y cierre del diálogo de añadir cliente
-  const [currentForm, setCurrentForm] = useState("InfoBasicaForm"); // Estado para controlar el formulario actual en el diálogo de añadir cliente
-  const [currentClientID, setCurrentClientID] = useState(null); // Estado para almacenar el ID del cliente actual
+  const [clients, setClients] = useState([]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [clientToDelete, setClientToDelete] = useState(null);
+  const [addClientDialogOpen, setAddClientDialogOpen] = useState(false);
+  const [currentForm, setCurrentForm] = useState("InfoBasicaForm");
+  const [currentClientID, setCurrentClientID] = useState(null);
+  const [loading, setLoading] = useState(true); // Estado para controlar la carga de los clientes
 
   useEffect(() => {
-    fetchClients(); // Carga los clientes al inciar la página
+    fetchClients();
   }, []);
 
   const fetchClients = async () => {
     try {
-      const response = await axios.get("https://coachifybackend-1.onrender.com/api/clientes");
+      const response = await axios.get(
+        "https://coachifybackend-1.onrender.com/api/clientes"
+      );
       setClients(response.data);
     } catch (error) {
       console.error("Error fetching clients:", error);
+    } finally {
+      setLoading(false); // Una vez finalizada la carga, establece el estado de carga como false
     }
   };
 
-  const handleViewClient = (clienteID) => {
-    
-  };
+  const handleViewClient = (clienteID) => {};
 
   const openModal = (clienteID) => {
     console.log("Opening modal for client ID:", clienteID);
@@ -81,48 +85,57 @@ const ClientsPage = () => {
       <div className="sidebar">
         <Sidebar />
       </div>
-      <div className="clients-content">
-        <div className="header">
-          <h1>Clientes</h1>
-          <button className="btnAñadir" onClick={openAddClientDialog}>
-            Añadir
-          </button>
-        </div>
-        <hr />
-        <br />
-        <div className="clients-list">
-          {clients.map((client) => (
-            <div key={client.clienteID} className="client-card">
-              <img
-                src={client.img || "https://via.placeholder.com/150"}
-                alt={client.nombreCompleto}
-                className="client-image"
-              />
-              <div className="client-details">
-                <h2>{client.nombreCompleto}</h2>
-                <p>Correo: {client.mail}</p>
-                <p>Teléfono: {client.telefono}</p>
+      {loading ? (
+        <Loader />
+      ) : (
+        <div className="clients-content">
+          <div className="header">
+            <h1>Clientes</h1>
+            <button className="btnAñadir" onClick={openAddClientDialog}>
+              Añadir
+            </button>
+          </div>
+          <hr />
+          <br />
+          {/* Muestra el loader mientras carga los clientes */}
+
+          <div className="clients-list">
+            {clients.map((client) => (
+              <div key={client.clienteID} className="client-card">
+                <img
+                  src={client.img || "../assets/img/user-removebg-preview.png"}
+                  alt={client.nombreCompleto}
+                  className="client-image"
+                />
+                <div className="client-details">
+                  <h2>{client.nombreCompleto}</h2>
+                  <p>Correo: {client.mail}</p>
+                  <p>Teléfono: {client.telefono}</p>
+                </div>
+                <div className="buttons">
+                  <button
+                    onClick={() => handleViewClient(client.clienteID)}
+                    className="btnver"
+                  >
+                    <Link
+                      to={`/clientes/${client.clienteID}`}
+                      className="btnver"
+                    >
+                      <FontAwesomeIcon icon={faEye} />
+                    </Link>
+                  </button>
+                  <button
+                    onClick={() => openModal(client.clienteID)}
+                    className="btnEliminar"
+                  >
+                    <FontAwesomeIcon icon={faTrashAlt} />
+                  </button>
+                </div>
               </div>
-              <div className="buttons">
-                <button
-                  onClick={() => handleViewClient(client.clienteID)}
-                  className="btnver"
-                >
-                  <Link to={`/clientes/${client.clienteID}`} className="btnver">
-                    <FontAwesomeIcon icon={faEye} />
-                  </Link>
-                </button>
-                <button
-                  onClick={() => openModal(client.clienteID)}
-                  className="btnEliminar"
-                >
-                  <FontAwesomeIcon icon={faTrashAlt} />
-                </button>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      )}
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -137,16 +150,10 @@ const ClientsPage = () => {
         <p className="pregunta">
           ¿Estás seguro de que quieres eliminar este cliente?
         </p>
-        <button
-          className="btnEliminarModal"
-          onClick={handleDeleteClient}
-        >
+        <button className="btnEliminarModal" onClick={handleDeleteClient}>
           Eliminar
         </button>
-        <button
-          className="btnCancelarModal"
-          onClick={closeModal}
-        >
+        <button className="btnCancelarModal" onClick={closeModal}>
           Cancelar
         </button>
       </Modal>
