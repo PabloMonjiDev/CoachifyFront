@@ -108,6 +108,7 @@ const VistaClientePage = () => {
       <div className="sidebar">
         <Sidebar />
       </div>
+      
       <div className="contenedor-pagina">
         {/* COMPONENTE INFORMACION */}
         <div className="arriba">
@@ -206,6 +207,7 @@ const VistaClientePage = () => {
             </div>
           </div>
         </div>
+      
 
         {/* COMPONENTE PROGRESO */}
         <div className="abajo">
@@ -261,6 +263,7 @@ const VistaClientePage = () => {
           </div>
         </div>
       </div>
+      
       {/* Modal para añadir peso */}
       <Modal
         isOpen={modalOpen}

@@ -1,4 +1,3 @@
-// Componente EjerciciosComponente
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../../assets/styles/EjerciciosComponente.css";
@@ -10,11 +9,13 @@ import {
   faArrowLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import EjercicioForm from "./EjercicioForm";
+import Loader from "../common/Loader";
 
 const EjerciciosComponente = ({ rutinaID, volverARutinas }) => {
   const [ejercicios, setEjercicios] = useState([]);
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
   const [ejercicioSeleccionado, setEjercicioSeleccionado] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchEjercicios = async () => {
@@ -27,6 +28,8 @@ const EjerciciosComponente = ({ rutinaID, volverARutinas }) => {
         }
       } catch (error) {
         console.error("Error al cargar los ejercicios:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -63,68 +66,74 @@ const EjerciciosComponente = ({ rutinaID, volverARutinas }) => {
 
   return (
     <div className="ejercicios-container">
-      <h1 className="titulo">
-        <button className="volver-button" onClick={handleVolver}>
-          <FontAwesomeIcon icon={faArrowLeft} />
-        </button>
-        Ejercicios
-        <button
-          className="añadir-button"
-          onClick={() => handleToggleFormulario(null)}
-        >
-          <FontAwesomeIcon icon={faPlus} />
-        </button>
-      </h1>
-      {mostrarFormulario && (
-        <EjercicioForm
-          rutinaID={rutinaID}
-          onClose={() => setMostrarFormulario(false)}
-          ejercicio={ejercicioSeleccionado}
-          actualizarEjercicios={setEjercicios}
-        />
-      )}
-      <div className="ejercicios-lista">
-        {ejercicios.map((ejercicio, index) => (
-          <div
-            key={ejercicio.rutinaEjercicioID}
-            className={`ejercicio-card ${
-              index === ejercicios.length - 1 && mostrarFormulario
-                ? "ultimo-card-formulario-visible"
-                : ""
-            }`}
-          >
-            <img
-              src={
-                ejercicio.img ||
-                "https://via.placeholder.com/150/CCCCCC?text=No hay imagen"
-              }
-              alt={ejercicio.nombre}
-              className="ejercicio-imagen"
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <h1 className="titulo">
+            <button className="volver-button" onClick={handleVolver}>
+              <FontAwesomeIcon icon={faArrowLeft} />
+            </button>
+            Ejercicios
+            <button
+              className="añadir-button"
+              onClick={() => handleToggleFormulario(null)}
+            >
+              <FontAwesomeIcon icon={faPlus} />
+            </button>
+          </h1>
+          {mostrarFormulario && (
+            <EjercicioForm
+              rutinaID={rutinaID}
+              onClose={() => setMostrarFormulario(false)}
+              ejercicio={ejercicioSeleccionado}
+              actualizarEjercicios={setEjercicios}
             />
-            <div className="ejercicio-info">
-              <h2 className="ejercicio-nombre">{ejercicio.nombre}</h2>
-              <p className="series-repeticiones">
-                Series: {ejercicio.series} Repeticiones:{" "}
-                {ejercicio.repeticiones}
-              </p>
-              <div className="botones-accion">
-                <button
-                  className="boton-modificar"
-                  onClick={() => handleModificar(ejercicio)}
-                >
-                  <FontAwesomeIcon icon={faEdit} />
-                </button>
-                <button
-                  className="boton-eliminar"
-                  onClick={() => handleEliminar(ejercicio)}
-                >
-                  <FontAwesomeIcon icon={faTrash} />
-                </button>
+          )}
+          <div className="ejercicios-lista">
+            {ejercicios.map((ejercicio, index) => (
+              <div
+                key={ejercicio.rutinaEjercicioID}
+                className={`ejercicio-card ${
+                  index === ejercicios.length - 1 && mostrarFormulario
+                    ? "ultimo-card-formulario-visible"
+                    : ""
+                }`}
+              >
+                <img
+                  src={
+                    ejercicio.img ||
+                    "https://via.placeholder.com/150/CCCCCC?text=No hay imagen"
+                  }
+                  alt={ejercicio.nombre}
+                  className="ejercicio-imagen"
+                />
+                <div className="ejercicio-info">
+                  <h2 className="ejercicio-nombre">{ejercicio.nombre}</h2>
+                  <p className="series-repeticiones">
+                    Series: {ejercicio.series} Repeticiones:{" "}
+                    {ejercicio.repeticiones}
+                  </p>
+                  <div className="botones-accion">
+                    <button
+                      className="boton-modificar"
+                      onClick={() => handleModificar(ejercicio)}
+                    >
+                      <FontAwesomeIcon icon={faEdit} />
+                    </button>
+                    <button
+                      className="boton-eliminar"
+                      onClick={() => handleEliminar(ejercicio)}
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                  </div>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </>
+      )}
     </div>
   );
 };

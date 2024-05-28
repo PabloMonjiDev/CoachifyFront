@@ -26,6 +26,22 @@ export const messages = {
   showMore: total => `+ Ver más (${total})`
 };
 
+const fetchEventos = async (setEventos, setError) => {
+  try {
+    const res = await axios.get("https://coachifybackend-1.onrender.com/api/calendario");
+    const eventosFormateados = res.data.map((evento) => ({
+      ...evento,
+      start: new Date(evento.fechaInicio),
+      end: new Date(evento.fechaFin),
+      title: evento.nombreCita,
+      id: evento.eventoID,
+    }));
+    setEventos(eventosFormateados);
+  } catch (error) {
+    setError("Error al cargar los eventos.");
+  }
+};
+
 const Calendario = () => {
   const [eventos, setEventos] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -39,23 +55,7 @@ const Calendario = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchEventos = async () => {
-      try {
-        const res = await axios.get("https://coachifybackend-1.onrender.com/api/calendario");
-        const eventosFormateados = res.data.map((evento) => ({
-          ...evento,
-          start: new Date(evento.fechaInicio),
-          end: new Date(evento.fechaFin),
-          title: evento.nombreCita,
-          id: evento.id,
-        }));
-        setEventos(eventosFormateados);
-      } catch (error) {
-        setError("Error al cargar los eventos.");
-      }
-    };
-
-    fetchEventos();
+    fetchEventos(setEventos, setError);
   }, []);
 
   const handleSelectSlot = ({ start, end }) => {
@@ -82,6 +82,7 @@ const Calendario = () => {
 
   const handleCloseModal = () => {
     setShowModal(false);
+    fetchEventos(setEventos, setError); // Actualizar eventos al cerrar el modal
     resetForm();
   };
 
@@ -96,13 +97,13 @@ const Calendario = () => {
         horaFin: moment(horaFin).format("HH:mm:ss"),
       };
 
-      if (editingEvent && editingEvent.id) {
+      if (editingEvent && editingEvent.eventoID) {
         await axios.put(
-          `https://coachifybackend-1.onrender.com/api/calendario/${editingEvent.id}`,
+          `https://coachifybackend-1.onrender.com/api/calendario/${editingEvent.eventoID}`,
           event
         );
         const updatedEvents = eventos.map((ev) =>
-          ev.id === editingEvent.id ? { ...ev, ...event } : ev
+          ev.eventoID === editingEvent.eventoID ? { ...ev, ...event } : ev
         );
         setEventos(updatedEvents);
       } else {
@@ -126,10 +127,13 @@ const Calendario = () => {
   };
 
   const handleDelete = async () => {
-    if (editingEvent && editingEvent.id) {
+    console.log(editingEvent.eventoID)
+
+    if (editingEvent && editingEvent.eventoID) {
+      
       try {
-        await axios.delete(`https://coachifybackend-1.onrender.com/api/calendario/${editingEvent.id}`);
-        const updatedEvents = eventos.filter((ev) => ev.id !== editingEvent.id);
+        await axios.delete(`https://coachifybackend-1.onrender.com/api/calendario/${editingEvent.eventoID}`);
+        const updatedEvents = eventos.filter((ev) => ev.eventoID !== editingEvent.eventoID);
         setEventos(updatedEvents);
         handleCloseModal();
       } catch (error) {

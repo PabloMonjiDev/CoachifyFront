@@ -204,6 +204,53 @@ input {
   color: #333 !important;
 }
 
+/****LOADER******/
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Ajusta la altura del loader para que cubra toda el contenedor-pagina */
+  width: 100%; /* Ajusta el ancho del loader para que cubra toda la pantalla */
+  position: absolute; /* Ajusta la posición del loader para que esté superpuesto */
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Ajusta el color de fondo para que sea semi-transparente */
+  z-index: 9999; /* Asegura que el loader esté por encima de otros elementos */
+}
+
+.loader {
+  width: 50px;
+  height: 50px; /* Ajusta el tamaño del loader según tus preferencias */
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 8px solid #0000;
+  border-right-color: #ffa50097;
+  position: relative;
+  animation: l24 1s infinite linear;
+}
+
+.loader:before,
+.loader:after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: inherit;
+  animation: inherit;
+  animation-duration: 2s;
+}
+
+.loader:after {
+  animation-duration: 4s;
+}
+
+@keyframes l24 {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+
 @media (max-width: 768px) {
 
   .contenedor {

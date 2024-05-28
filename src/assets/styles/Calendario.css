@@ -89,7 +89,7 @@
     min-height: 70% !important;
     overflow-y: hidden !important;
     transition: all 0.3s ease !important;
-    z-index: 1010 !important; /* Asegúrate de que el z-index del modal sea mayor que el del overlay */
+    z-index: 1010 !important;
   }
   
   .modal-header {
@@ -112,6 +112,10 @@
     border: none !important;
     color: white !important;
     margin-bottom: 5px;
+  }
+
+  .form-control:focus {
+    background-color: #666 !important;
   }
   
   .modal-footer {

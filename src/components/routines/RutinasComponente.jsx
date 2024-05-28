@@ -4,18 +4,15 @@ import "../../assets/styles/RutinasComponente.css";
 import EjerciciosComponente from "./EjerciciosComponent";
 import RutinaForm from "./RutinaForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faPlus,
-  faEdit,
-  faTrash,
-  faEye,
-} from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faEdit, faTrash, faEye } from "@fortawesome/free-solid-svg-icons";
+import Loader from "../common/Loader";
 
 const RutinasComponente = ({ clienteID }) => {
   const [rutinas, setRutinas] = useState([]);
   const [rutinaSeleccionada, setRutinaSeleccionada] = useState(null);
   const [mostrarEjercicios, setMostrarEjercicios] = useState(false);
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchRutinas = async () => {
@@ -26,6 +23,8 @@ const RutinasComponente = ({ clienteID }) => {
         setRutinas(response.data);
       } catch (error) {
         console.error("Error al cargar las rutinas:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -72,63 +71,69 @@ const RutinasComponente = ({ clienteID }) => {
 
   return (
     <div className="rutinas-container">
-      {!mostrarEjercicios && (
+      {loading ? (
+        <Loader />
+      ) : (
         <>
-          <h1 className="titulo">
-            Rutina
-            <button
-              className="añadir-button"
-              onClick={() => handleToggleFormulario(null)}
-            >
-              <FontAwesomeIcon icon={faPlus} />
-            </button>
-          </h1>
-          {mostrarFormulario && (
-            <RutinaForm
-              clienteID={clienteID}
-              onClose={() => setMostrarFormulario(false)}
-              rutina={rutinaSeleccionada}
-              actualizarRutinas={actualizarRutinas}
+          {!mostrarEjercicios && (
+            <>
+              <h1 className="titulo">
+                Rutina
+                <button
+                  className="añadir-button"
+                  onClick={() => handleToggleFormulario(null)}
+                >
+                  <FontAwesomeIcon icon={faPlus} />
+                </button>
+              </h1>
+              {mostrarFormulario && (
+                <RutinaForm
+                  clienteID={clienteID}
+                  onClose={() => setMostrarFormulario(false)}
+                  rutina={rutinaSeleccionada}
+                  actualizarRutinas={actualizarRutinas}
+                />
+              )}
+
+              <div className="rutinas-lista">
+                {rutinas.map((rutina) => (
+                  <div key={rutina.rutinaID} className="rutina-link">
+                    <div className="rutina-card">
+                      <h2 className="rutina-nombre">{rutina.nombre}</h2>
+                      <div className="botones-accion">
+                        <button
+                          className="boton-modificar"
+                          onClick={() => handleSeleccionarRutina(rutina.rutinaID)}
+                        >
+                          <FontAwesomeIcon icon={faEye} />
+                        </button>
+                        <button
+                          className="boton-modificar"
+                          onClick={() => handleModificar(rutina)}
+                        >
+                          <FontAwesomeIcon icon={faEdit} />
+                        </button>
+                        <button
+                          className="boton-eliminar"
+                          onClick={() => handleEliminar(rutina)}
+                        >
+                          <FontAwesomeIcon icon={faTrash} />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+          {mostrarEjercicios && (
+            <EjerciciosComponente
+              key={rutinaSeleccionada}
+              rutinaID={rutinaSeleccionada}
+              volverARutinas={() => setMostrarEjercicios(false)}
             />
           )}
-
-          <div className="rutinas-lista">
-            {rutinas.map((rutina) => (
-              <div key={rutina.rutinaID} className="rutina-link">
-                <div className="rutina-card">
-                  <h2 className="rutina-nombre">{rutina.nombre}</h2>
-                  <div className="botones-accion">
-                    <button
-                      className="boton-modificar"
-                      onClick={() => handleSeleccionarRutina(rutina.rutinaID)}
-                    >
-                      <FontAwesomeIcon icon={faEye} />
-                    </button>
-                    <button
-                      className="boton-modificar"
-                      onClick={() => handleModificar(rutina)}
-                    >
-                      <FontAwesomeIcon icon={faEdit} />
-                    </button>
-                    <button
-                      className="boton-eliminar"
-                      onClick={() => handleEliminar(rutina)}
-                    >
-                      <FontAwesomeIcon icon={faTrash} />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
         </>
-      )}
-      {mostrarEjercicios && (
-        <EjerciciosComponente
-          key={rutinaSeleccionada}
-          rutinaID={rutinaSeleccionada}
-          volverARutinas={() => setMostrarEjercicios(false)}
-        />
       )}
     </div>
   );
