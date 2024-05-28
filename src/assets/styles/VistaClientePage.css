@@ -316,6 +316,8 @@ input {
     border-color: white;
     margin-right: 5px;
     box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
+    height: auto;
+    overflow: auto;
   }
   
   .informacion-seccion-historial {
@@ -328,6 +330,8 @@ input {
     border-color: white;
     margin-right: 5px;
     box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
+    height: auto;
+    overflow: auto;
   }
   
   .informacion-seccion-objetivos {
@@ -340,6 +344,8 @@ input {
     border-color: white;
     margin-right: 5px;
     box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
+    height: auto;
+    overflow: auto;
   }
 
 }

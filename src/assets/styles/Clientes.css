@@ -200,11 +200,12 @@
   .custom-modal-añadir {
     width: 90%;
     height: 75%;
-    overflow-y: hidden;
   }
+  
   .custom-modal {
     width: 90% !important;
     height: 20% !important;
     max-height: 20% !important;
+    overflow-y: auto !important;
   }
 }

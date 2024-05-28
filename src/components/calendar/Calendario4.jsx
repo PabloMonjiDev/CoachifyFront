@@ -7,6 +7,9 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import "../../assets/styles/Calendario.css";
+import "moment/locale/es";
+
+moment.locale('es');
 
 const localizer = momentLocalizer(moment);
 
@@ -23,6 +26,18 @@ export const messages = {
   time: 'Hora',
   event: 'Evento',
   noEventsInRange: 'No hay eventos en este rango',
+  dayNames: [
+    'Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'
+  ],
+  dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'],
+  monthNames: [
+    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+  ],
+  monthNamesShort: [
+    'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
+    'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'
+  ],
   showMore: total => `+ Ver más (${total})`
 };
 

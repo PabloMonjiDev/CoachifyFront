@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Chart from "chart.js/auto";
 import "chartjs-adapter-date-fns";
+import { es } from 'date-fns/locale'; // Importa la localización en español desde date-fns
 import "../assets/styles/Grafico.css";
 
 const GraficoComponente = ({ clienteID }) => {
@@ -65,6 +66,7 @@ const GraficoComponente = ({ clienteID }) => {
                   displayFormats: {
                     day: "MMM d",
                   },
+                  locale: es, // Establece la localización en español
                 },
                 ticks: {
                   color: "white",
